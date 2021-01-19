@@ -1,0 +1,12 @@
+node_modules/
+
+package-lock.json
+
+.env
+
+# IDE settings
+.vscode/
+.idea/
+.vs/
+bin/
+obj/
