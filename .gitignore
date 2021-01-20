@@ -4,9 +4,12 @@ package-lock.json
 
 .env
 
+
 # IDE settings
 .vscode/
 .idea/
 .vs/
 bin/
 obj/
+venv/
+__pycache__
