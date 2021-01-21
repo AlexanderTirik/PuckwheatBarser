@@ -1,11 +1,10 @@
 import { stringifyUrl, ParsedQuery } from 'query-string';
 import { IFetchParams } from '../models/fetch/IFetchParams';
 import { FetchMethod } from '../enums/FetchMethod';
-import { getToken } from './storageHelper';
 import { IResponseError } from '../models/fetch/IResponseError';
+import { env } from '../../env';
 
 const getInitHeaders = (contentType = 'application/json', hasContent = true) => {
-  const token = getToken();
   const headers: HeadersInit = new Headers();
 
   if (hasContent) {
@@ -40,8 +39,9 @@ const throwIfResponseFailed = async (res: Response) => {
 };
 
 const makeRequest = (method: FetchMethod) => async <T>(url: string, params?: IFetchParams) => {
+  const domainUrl = `${env.urls.server}${url}`;
   const [fetchUrl, body] = method === FetchMethod.GET
-    ? [getFetchUrl(url, params as ParsedQuery), undefined]
+    ? [getFetchUrl(domainUrl, params as ParsedQuery), undefined]
     : [url, params];
   const fetchOptions = getFetchOptions(method, body);
 
