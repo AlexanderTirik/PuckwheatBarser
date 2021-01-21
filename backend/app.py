@@ -1,11 +1,14 @@
+import asyncio
+
+import aiohttp
 from sanic import Sanic
 from sanic.response import json
+from sanic_cors import CORS
 from bs4 import BeautifulSoup as bs
-import asyncio
-import aiohttp
 
 
 app = Sanic(__name__)
+CORS(app)
 sem = None
 
 
