@@ -6,5 +6,5 @@ export interface IBuckwheatData {
   imgUrl: string;
   shop: string;
   weight: string;
-  weight_value: number;
+  weightValue: number;
 }
