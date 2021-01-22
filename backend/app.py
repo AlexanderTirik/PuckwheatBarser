@@ -123,11 +123,12 @@ async def parse_epicentrk():
             weight_value = parse_weight(weight)
 
             data.append({
-                'name': name,
                 'price': price,
+                'name': name,
                 'source': source,
                 'productUrl': productUrl,
                 'imgUrl': imgUrl,
+                'shop': shop,
                 'weight': weight,
                 'weightValue': weight_value
             })
@@ -147,7 +148,7 @@ async def get_data(request):
     data_fozzy = await parse_fozzy()
     data_epicentrik = await parse_epicentrk()
     # next calls of parsers
-    
+
     data = list(chain(data_fozzy, data_epicentrik))
     return json(data)
 
