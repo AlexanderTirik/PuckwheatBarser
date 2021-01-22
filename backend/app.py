@@ -5,6 +5,7 @@ from sanic import Sanic
 from sanic.response import json
 from sanic_cors import CORS
 from bs4 import BeautifulSoup as bs
+from itertools import chain
 
 
 app = Sanic(__name__)
@@ -51,12 +52,10 @@ def parse_weight(weight):
 
 
 def clean_weight(weight):
-    print(f'w={weight}')
     weight_value = parse_weight(weight)
     if weight_value % 1000 == 0:
         weight = str(int(weight_value / 1000)) + 'кг'
     weight = ''.join(weight.split())
-    print(f'->{weight}')
     return weight
 
 
@@ -145,12 +144,12 @@ async def index(request):
 
 @app.route("get_data")
 async def get_data(request):
-    # data_fozzy = await parse_fozzy()
+    data_fozzy = await parse_fozzy()
     data_epicentrik = await parse_epicentrk()
     # next calls of parsers
-    # join data
     
-    return json(data_epicentrik)
+    data = list(chain(data_fozzy, data_epicentrik))
+    return json(data)
 
 
 if __name__ == "__main__":
