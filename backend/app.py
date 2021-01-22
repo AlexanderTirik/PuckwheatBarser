@@ -50,6 +50,16 @@ def parse_weight(weight):
             return int(weight[:-1])
 
 
+def clean_weight(weight):
+    print(f'w={weight}')
+    weight_value = parse_weight(weight)
+    if weight_value % 1000 == 0:
+        weight = str(int(weight_value / 1000)) + 'кг'
+    weight = ''.join(weight.split())
+    print(f'->{weight}')
+    return weight
+
+
 async def parse_fozzy():
     """
     Parse buckwheat from fozzy
@@ -71,6 +81,7 @@ async def parse_fozzy():
             productUrl = description.find('div', class_='h3 product-title').a.get('href')
             imgUrl = product.find('div', class_='thumbnail-container').a.img.get('src')
             weight = product.find('div', class_='product-reference text-muted').a.get_text().replace('Фасовка: ', '').strip()
+            weight = clean_weight(weight)
             weight_value = parse_weight(weight)
 
             data.append({
@@ -109,6 +120,7 @@ async def parse_epicentrk():
             productUrl = host + product.find('a', class_='card__photo').get('href') 
             imgUrl = product.find('a', class_='card__photo').img.get('src')
             weight = product.find('ul', class_='card__characteristics').find_all('li')[2].get_text().replace('Вага:', '').strip()
+            weight = clean_weight(weight)         
             weight_value = parse_weight(weight)
 
             data.append({
