@@ -4,11 +4,12 @@ import { fetchBuckwheatInfoRoutine } from '../routines/buckwheat';
 
 export interface IDashboardState {
   isLoading: boolean;
-  buckwheatData?: IBuckwheatData[];
+  buckwheatData: IBuckwheatData[];
 }
 
 const initialState: IDashboardState = {
-  isLoading: false
+  isLoading: false,
+  buckwheatData: []
 };
 
 const reducer = (state = initialState, { type, payload }: Routine<any>): IDashboardState => {
