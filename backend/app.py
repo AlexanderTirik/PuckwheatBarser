@@ -81,11 +81,48 @@ async def parse_fozzy():
                 'imgUrl': imgUrl,
                 'shop': shop,
                 'weight': weight,
-                'weight_value': weight_value
+                'weightValue': weight_value
             })
         except Exception as e:
             print(f'Something was wrong: {e}')
     
+    return data
+
+
+async def parse_epicentrk():
+    """
+    Parse buckwheat from epicentrk
+    """
+    url = 'https://epicentrk.ua/ua/shop/krupy-i-makaronnye-izdeliya/fs/vid-krupa-grechnevaya/'
+    host = 'https://epicentrk.ua'
+    shop = 'Епіцентр'
+
+    soup = await get_soup(url)
+    products = soup.find_all('div', class_='card-wrapper')
+
+    data = []
+    for product in products:
+        try:
+            name = product.find('div', class_='card__name').a.b.get_text().strip()
+            price = product.find('span', class_='card__price-sum').contents[0].strip()
+            source = product.find('ul', class_='card__characteristics').find_all('li')[1].get_text().replace('Бренд:', '').strip()
+            productUrl = host + product.find('a', class_='card__photo').get('href') 
+            imgUrl = product.find('a', class_='card__photo').img.get('src')
+            weight = product.find('ul', class_='card__characteristics').find_all('li')[2].get_text().replace('Вага:', '').strip()
+            weight_value = parse_weight(weight)
+
+            data.append({
+                'name': name,
+                'price': price,
+                'source': source,
+                'productUrl': productUrl,
+                'imgUrl': imgUrl,
+                'weight': weight,
+                'weightValue': weight_value
+            })
+        except Exception as e:
+            print(f'Something was wrong: {e}')
+
     return data
 
 
@@ -96,10 +133,12 @@ async def index(request):
 
 @app.route("get_data")
 async def get_data(request):
-    data_fozzy = await parse_fozzy()
+    # data_fozzy = await parse_fozzy()
+    data_epicentrik = await parse_epicentrk()
     # next calls of parsers
-
-    return json(data_fozzy)
+    # join data
+    
+    return json(data_epicentrik)
 
 
 if __name__ == "__main__":
