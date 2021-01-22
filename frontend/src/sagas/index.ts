@@ -1,4 +1,9 @@
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-export default function* rootSaga() {
 
+import { all } from 'redux-saga/effects';
+import dashboardSaga from '../scenes/Dashboard/sagas';
+
+export default function* rootSaga() {
+  yield all([
+    dashboardSaga()
+  ]);
 }
