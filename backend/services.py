@@ -66,7 +66,7 @@ def clean_name(name):
     return name
 
 
-def parse_source_from_name(name):
+def parse_source_from_name(name, default_name=None):
     """
     Parse source from name of buckwheat
     Recommended for use with data from Auchan
@@ -79,18 +79,12 @@ def parse_source_from_name(name):
     lst = name.split()
     lst = map(lambda el: el if not el.lower() in skip_words else '', lst)
     source = ' '.join(lst).strip()
-    return source
+    
+    return source or default_name
 
 
 def fixed_price_format(price, digits=2):
     return f'{float(price):.{digits}f}'
-
-
-def check_is_packed(source, default_source=None):
-    if source:
-        return True, source
-    else:
-        return False, default_source
 
 
 def asc_sort_by_price(data):
@@ -104,4 +98,9 @@ def sort_by_price(data, order='NONE'):
         return asc_sort_by_price(data)
     elif order == 'DESC':
         return list(reversed(asc_sort_by_price(data)))
-        
+
+
+def is_buckwheat(name):
+    good = ['гречка', 'гречана', 'крупа']
+    bad = ['борошно', ]
+    return any(el in name.lower() for el in good) and not any(el in name.lower() for el in bad)
