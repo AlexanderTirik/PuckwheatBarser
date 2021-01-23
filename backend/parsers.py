@@ -1,5 +1,5 @@
 from backend.services import (
-    clean_weight, parse_weight, get_soup, parse_source_from_name, clean_name, fixed_price_format
+    clean_weight, parse_weight, get_soup, parse_source_from_name, clean_name, fixed_price_format, check_is_packed
 )
 
 
@@ -29,7 +29,8 @@ async def parse_fozzy():
                                                                                                      '').strip()
             weight = clean_weight(weight)
             weight_value = parse_weight(weight)
-
+            is_packed, source = check_is_packed(source, default_source=shop)
+            
             data.append({
                 'price': price,
                 'name': name,
@@ -38,7 +39,8 @@ async def parse_fozzy():
                 'imgUrl': img_url,
                 'shop': shop,
                 'weight': weight,
-                'weightValue': weight_value
+                'weightValue': weight_value,
+                'is_packed': is_packed,
             })
         except Exception as e:
             print(f'Something was wrong: {e}')
@@ -72,7 +74,8 @@ async def parse_epicentrk():
                                                                                                              '').strip()
             weight = clean_weight(weight)
             weight_value = parse_weight(weight)
-
+            is_packed, source = check_is_packed(source, default_source=shop)
+            
             data.append({
                 'price': price,
                 'name': name,
@@ -81,7 +84,8 @@ async def parse_epicentrk():
                 'imgUrl': img_url,
                 'shop': shop,
                 'weight': weight,
-                'weightValue': weight_value
+                'weightValue': weight_value,
+                'is_packed': is_packed,
             })
         except Exception as e:
             print(f'Something was wrong: {e}')
@@ -113,7 +117,8 @@ async def parse_auchan():
             weight = product.find('div', class_='product-tile__title-wrapper').find('div').get_text()
             weight = clean_weight(weight)
             weight_value = parse_weight(weight)
-
+            is_packed, source = check_is_packed(source, default_source=shop)
+            
             data.append({
                 'price': price,
                 'name': name,
@@ -123,6 +128,7 @@ async def parse_auchan():
                 'shop': shop,
                 'weight': weight,
                 'weightValue': weight_value,
+                'is_packed': is_packed,
             })
         except Exception as e:
             print(f'Something was wrong: {e}')
