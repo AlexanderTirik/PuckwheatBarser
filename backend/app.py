@@ -5,7 +5,7 @@ from sanic.response import json
 from sanic_cors import CORS
 
 from backend.parsers import (
-    parse_fozzy, parse_epicentrk
+    parse_fozzy, parse_epicentrk, parse_auchan
 )
 
 app = Sanic(__name__)
@@ -29,9 +29,9 @@ async def index(request):
 async def get_data(request):
     data_fozzy = await parse_fozzy()
     data_epicentrik = await parse_epicentrk()
-    # next calls of parsers
-
-    data = list(chain(data_fozzy, data_epicentrik))
+    data_auchan = await parse_auchan()
+    
+    data = list(chain(data_fozzy, data_epicentrik, data_auchan))
     return json(data)
 
 
