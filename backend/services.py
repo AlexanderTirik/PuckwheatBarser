@@ -1,5 +1,6 @@
 import aiohttp
 from bs4 import BeautifulSoup as bs
+import re
 
 
 async def bounded_fetch(session, url):
@@ -34,8 +35,29 @@ def parse_weight(weight):
 
 
 def clean_weight(weight):
+    """
+    Parse weight and transform to pretty and format uniformly
+    """
     weight_value = parse_weight(weight)
     if weight_value % 1000 == 0:
         weight = str(int(weight_value / 1000)) + 'кг'
     weight = ''.join(weight.split())
     return weight
+
+
+def clean_name(name):
+    """
+    Parse clean name, exclude weight and unnecessary words
+    """
+    weight_pattern = r'(\([0-9]*\))|(([0-9]+[\*х])?[0-9]+\s?к?г)|(1?(с?|\.*))'
+    name = re.sub(weight_pattern, '', name)
+    name = name.strip()
+    return name
+
+
+def parse_source_from_name(name):
+    """
+    Parse source from name of buckwheat
+    """
+    # to do
+    return "-"
