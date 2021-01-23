@@ -1,13 +1,17 @@
+.cardWrapper
+  width: 300px
+  margin: 10px 20px
+  height: 145px
+
 .card
   -webkit-box-shadow: 0px 0px 8px 4px rgba(208, 204, 194, 0.2)
   -moz-box-shadow: 0px 0px 8px 4px rgba(208, 204, 194, 0.2)
   box-shadow: 0px 0px 8px 4px rgba(208, 204, 194, 0.2)
 
+  cursor: pointer
+  transition: 0.2s
   border-radius: 4px
   background: #ffffff
-  margin: 10px 20px
-  width: 300px
-  height: 140px
   text-overflow: ellipsis
 
 .name
@@ -27,4 +31,41 @@
   margin-left: 10px
   \:global(.iconText)
     margin-bottom: 5px
+
+
+.card:hover
+  transform: scale(1.1)
+  transition: 0.2s
+  -webkit-box-shadow: 0px 0px 8px 4px rgba(208, 204, 194, 0.5)
+  -moz-box-shadow: 0px 0px 8px 4px rgba(208, 204, 194, 0.5)
+  box-shadow: 0px 0px 8px 4px rgba(208, 204, 194, 0.5)
+
+  .name
+    text-overflow: clip
+    overflow: visible
+    white-space: normal
+
+@media only screen and (max-width: 600px)
+  .cardWrapper
+    width: 300px
+    min-height: 160px
+    height: auto
+    margin: 5px 0px
+
+  .card
+    min-height: 160px
+
+  .name
+    text-overflow: clip
+    overflow: visible
+    white-space: normal
+
+  .card:hover
+    transform: scale(1)
+
+    -webkit-box-shadow: 0px 0px 8px 4px rgba(208, 204, 194, 0.2)
+    -moz-box-shadow: 0px 0px 8px 4px rgba(208, 204, 194, 0.2)
+    box-shadow: 0px 0px 8px 4px rgba(208, 204, 194, 0.2)
+
+
 
