@@ -8,7 +8,7 @@ import SkeletonCard from '../../components/SkeletonCard';
 
 interface IProps {
   buckwheatData: IBuckwheatData[];
-  isLoading: boolean;
+  isLoading: boolean[];
 }
 
 const BuckwheatCards: FunctionComponent<IProps> = ({ buckwheatData, isLoading }) => {
@@ -22,7 +22,7 @@ const BuckwheatCards: FunctionComponent<IProps> = ({ buckwheatData, isLoading })
   return (
     <div className="d-flex flex-wrap justify-content-center">
       {
-        isLoading
+        isLoading.length
           ? Array.from(Array(20)).map(() => <SkeletonCard key={generateId()} />)
           : buckwheatData.map(data => (
             <Card

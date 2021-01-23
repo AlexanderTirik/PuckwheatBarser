@@ -8,16 +8,18 @@ import styles from './styles.module.sass';
 
 interface IProps {
   sort: Sort;
+  isLoading: boolean[];
   fetchBuckwheatInfo: IBindingCallback<Sort>;
 }
 
-const SortButtons: FunctionComponent<IProps> = ({ sort, fetchBuckwheatInfo }) => (
-  <div className={`d-flex justify-content-center ${styles.buttonGroup}`}>
+const SortButtons: FunctionComponent<IProps> = ({ sort, isLoading, fetchBuckwheatInfo }) => (
+  <div className={`d-flex justify-content-center ${styles.buttonGroup} ${isLoading.length ? styles.loading : ''}`}>
     <button
       type="button"
-      className={`${styles.сheap} ${sort === Sort.Asc ? styles.activeCheap : ''}`}
+      className={`${styles.сheap} ${sort === Sort.Asc ? styles.activeCheap : ''}
+      `}
       onClick={() => {
-        if (sort !== Sort.Asc) {
+        if (sort !== Sort.Asc && !isLoading.length) {
           fetchBuckwheatInfo(Sort.Asc);
         }
       }}
@@ -26,9 +28,10 @@ const SortButtons: FunctionComponent<IProps> = ({ sort, fetchBuckwheatInfo }) =>
     </button>
     <button
       type="button"
-      className={`${styles.noSort} ${sort === Sort.None ? styles.activeNoSort : ''}`}
+      className={`${styles.noSort} ${sort === Sort.None ? styles.activeNoSort : ''}
+      `}
       onClick={() => {
-        if (sort !== Sort.None) {
+        if (sort !== Sort.None && !isLoading.length) {
           fetchBuckwheatInfo(Sort.None);
         }
       }}
@@ -37,9 +40,10 @@ const SortButtons: FunctionComponent<IProps> = ({ sort, fetchBuckwheatInfo }) =>
     </button>
     <button
       type="button"
-      className={`${styles.expensive} ${sort === Sort.Desc ? styles.activeExpensive : ''}`}
+      className={`${styles.expensive} ${sort === Sort.Desc ? styles.activeExpensive : ''}
+      `}
       onClick={() => {
-        if (sort !== Sort.Desc) {
+        if (sort !== Sort.Desc && !isLoading.length) {
           fetchBuckwheatInfo(Sort.Desc);
         }
       }}
@@ -50,7 +54,8 @@ const SortButtons: FunctionComponent<IProps> = ({ sort, fetchBuckwheatInfo }) =>
 );
 
 const mapStateToProps = (state: IAppState) => ({
-  sort: state.dashboard.sort
+  sort: state.dashboard.sort,
+  isLoading: state.dashboard.isLoading
 });
 
 const mapDispatchToProps = {
