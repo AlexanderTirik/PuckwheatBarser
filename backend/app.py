@@ -27,12 +27,11 @@ async def index(request):
 
 @app.route("get_data")
 async def get_data(request):
-    #data_fozzy = await parse_fozzy()
-    #data_epicentrik = await parse_epicentrk()
+    data_fozzy = await parse_fozzy()
+    data_epicentrik = await parse_epicentrk()
     data_auchan = await parse_auchan()
     
-    #data = list(chain(data_fozzy, data_epicentrik, data_auchan))
-    data = list(chain(data_auchan))
+    data = list(chain(data_fozzy, data_epicentrik, data_auchan))
     return json(data)
 
 

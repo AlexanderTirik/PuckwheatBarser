@@ -49,7 +49,7 @@ def clean_name(name):
     """
     Parse clean name, exclude weight and unnecessary words
     """
-    weight_pattern = r'(\([0-9]*\))|(([0-9]+[\*х])?[0-9]+\s?к?г)|(1?(с?|\.*))'
+    weight_pattern = r'(\([0-9]*\))|(([0-9]+[\*х])?[0-9]+\s?к?г)|([0-9]+\S+)|(\.)|(\")'
     name = re.sub(weight_pattern, '', name)
     name = name.strip()
     return name
@@ -61,3 +61,7 @@ def parse_source_from_name(name):
     """
     # to do
     return "-"
+
+
+def fixed_price_format(price, digits=2):
+    return f'{float(price):.{digits}f}'

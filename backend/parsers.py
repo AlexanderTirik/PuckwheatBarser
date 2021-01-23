@@ -1,5 +1,5 @@
 from backend.services import (
-    clean_weight, parse_weight, get_soup, parse_source_from_name, clean_name
+    clean_weight, parse_weight, get_soup, parse_source_from_name, clean_name, fixed_price_format
 )
 
 
@@ -19,6 +19,7 @@ async def parse_fozzy():
             description = product.find('div', class_='product-description')
 
             price = description.find('span', class_='product-price').get('content')
+            price = fixed_price_format(price)
             name = description.find('div', class_='h3 product-title').a.get_text()
             name = clean_name(name)
             source = description.find('div', class_='product-brand').a.get_text()
@@ -62,6 +63,7 @@ async def parse_epicentrk():
             name = product.find('div', class_='card__name').a.b.get_text().strip()
             name = clean_name(name)
             price = product.find('span', class_='card__price-sum').contents[0].strip()
+            price = fixed_price_format(price)
             source = product.find('ul', class_='card__characteristics').find_all('li')[1].get_text().replace('Бренд:',
                                                                                                              '').strip()
             product_url = host + product.find('a', class_='card__photo').get('href')
@@ -102,6 +104,7 @@ async def parse_auchan():
     for product in products:
         try:
             price = product.find('span', class_='Price__value_caption').get_text()
+            price = fixed_price_format(price)
             name = product.a.get('title')
             name = clean_name(name)
             source = parse_source_from_name(name)
