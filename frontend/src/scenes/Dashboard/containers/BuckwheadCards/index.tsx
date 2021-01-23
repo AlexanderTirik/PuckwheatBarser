@@ -4,6 +4,7 @@ import { IBuckwheatData } from '../../../../common/models/IBuckwheatData';
 import { IAppState } from '../../../../common/models/store';
 import Card from '../../components/Card';
 import SkeletonCard from '../../components/SkeletonCard';
+import styles from './styles.module.sass';
 
 interface IProps {
   buckwheatData: IBuckwheatData[];
@@ -19,7 +20,7 @@ const BuckwheatCards: FunctionComponent<IProps> = ({ buckwheatData, isLoading })
   };
 
   return (
-    <div className="d-flex flex-wrap justify-content-center">
+    <div className={`d-flex flex-wrap justify-content-center ${styles.cardsBlock}`}>
       {
         isLoading
           ? Array.from(Array(20)).map(() => <SkeletonCard />)
@@ -28,6 +29,7 @@ const BuckwheatCards: FunctionComponent<IProps> = ({ buckwheatData, isLoading })
       {
         buckwheatData.map(data => (
           <Card
+            shop={data.shop}
             price={data.price}
             name={data.name}
             source={data.source}
