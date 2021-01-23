@@ -1,9 +1,9 @@
 import React, { FunctionComponent, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { IBindingAction } from '../../../../common/models/callback/IBindingAction';
+import Header from '../../../../components/Header';
 import { fetchBuckwheatInfoRoutine } from '../../routines/buckwheat';
 import BuckwheadCards from '../BuckwheadCards';
-import styles from './styles.module.sass';
 
 interface IProps {
   fetchBuckwheatInfo: IBindingAction;
@@ -15,7 +15,7 @@ const Dashboard: FunctionComponent<IProps> = ({ fetchBuckwheatInfo }) => {
   }, []);
   return (
     <>
-      <header className={`d-flex justify-content-center ${styles.header}`}>Puckwheat Barser</header>
+      <Header />
       <BuckwheadCards />
     </>
   );
