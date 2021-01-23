@@ -91,3 +91,17 @@ def check_is_packed(source, default_source=None):
         return True, source
     else:
         return False, default_source
+
+
+def asc_sort_by_price(data):
+    return sorted(data, key=lambda el: float(el.get('price')))
+
+
+def sort_by_price(data, order='NONE'):
+    if order == 'NONE':
+        return data
+    elif order == 'ASC':
+        return asc_sort_by_price(data)
+    elif order == 'DESC':
+        return list(reversed(asc_sort_by_price(data)))
+        

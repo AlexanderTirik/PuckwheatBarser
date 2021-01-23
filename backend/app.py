@@ -9,7 +9,7 @@ from backend.parsers import (
 )
 
 from backend.services import (
-    get_response
+    get_response, sort_by_price
 )
 
 from backend.urls import (
@@ -37,6 +37,7 @@ async def get_data(request):
     data_auchan = parse_auchan(response_auchan)
     
     data = list(chain(data_fozzy, data_epicentrk, data_auchan))
+    data = sort_by_price(data, order=request.args.get('sort'))
     return json(data)
 
 
