@@ -37,8 +37,12 @@ async def get_data(request):
     data_auchan = parse_auchan(response_auchan)
     
     data = list(chain(data_fozzy, data_epicentrk, data_auchan))
-    data = sort_by_price(data, order=request.args.get('sort'))
-    return json(data)
+    sort_order = request.args.get('sort')
+    data = sort_by_price(data, order=sort_order)
+    return json({
+        'buckwheatData': data,
+        'sort': sort_order,
+    })
 
 
 if __name__ == "__main__":
