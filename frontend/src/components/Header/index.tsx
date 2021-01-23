@@ -9,9 +9,9 @@ const Header: FunctionComponent = () => (
       Puckwheat Barser
     </span>
     <div className={`d-flex ${styles.shopColor}`}>
-      <ShopColor shop={Shops.Fozzy} color="#fffcf7" />
-      <ShopColor shop={Shops.Epicenter} color="#f8f0ff" />
-      <ShopColor shop={Shops.Auchan} color="#ebfff2" />
+      <ShopColor shop={Shops.Fozzy} color="#fff9c9" />
+      <ShopColor shop={Shops.Epicenter} color="#e8e3ff" />
+      <ShopColor shop={Shops.Auchan} color="#ffd1c9" />
     </div>
   </header>
 );

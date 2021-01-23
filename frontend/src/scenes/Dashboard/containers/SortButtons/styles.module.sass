@@ -1,0 +1,52 @@
+.сheap, .noSort, .expensive
+  border: none
+  padding: 10px
+  font-size: 1.4rem
+
+.сheap
+  border-top: 2px solid #FF907D
+  border-bottom: 2px solid #FF907D
+  border-left: 2px solid #FF907D
+  background: #ffd1c9
+  border-radius: 4px 0 0 4px
+  -webkit-box-shadow: -6px 0px 8px 4px rgba(255, 144, 125, 0.2)
+  -moz-box-shadow: -6px 0px 8px 4px rgba(255, 144, 125, 0.2)
+  box-shadow: -6px 0px 8px 4px rgba(255, 144, 125, 0.2)
+
+.noSort
+  border-top: 2px solid #AA96FF
+  border-bottom: 2px solid #AA96FF
+  background: #e8e3ff
+  -webkit-box-shadow: 0px -9px 8px 0px rgba(170, 150, 255, 0.2);
+  -moz-box-shadow: 0px -9px 8px 0px rgba(170, 150, 255, 0.2);
+  box-shadow: 0px -9px 8px 0px rgba(170, 150, 255, 0.2);
+
+.expensive
+  border-top: 2px solid #FFF07D
+  border-bottom: 2px solid #FFF07D
+  border-right: 2px solid #FFF07D
+  border-radius: 0 4px 4px 0
+  background: #fff9c9
+  -webkit-box-shadow: 6px 0px 8px 4px rgba(255, 240, 125, 0.2)
+  -moz-box-shadow: 6px 0px 8px 4px rgba(255, 240, 125, 0.2)
+  box-shadow: 6px 0px 8px 4px rgba(255, 240, 125, 0.2)
+
+.activeCheap, .activeNoSort, .activeExpensive
+  font-weight: 600
+
+.activeCheap
+  background: #FF907D
+
+.activeNoSort
+  background: #AA96FF
+
+.activeExpensive
+  background: #FFF07D
+
+.buttonGroup
+  padding-top: 80px
+  margin-bottom: 10px
+
+@media only screen and (max-width: 600px)
+  .buttonGroup
+    padding-top: 120px
