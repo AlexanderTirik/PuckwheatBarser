@@ -111,8 +111,9 @@ async def parse_auchan():
             product_url = host + product.find('a', class_='product-tile').get('href')
             img_url = product.find('img', class_='product-tile__image-i').get('src')
             weight = product.find('div', class_='product-tile__title-wrapper').find('div').get_text()
+            weight = clean_weight(weight)
             weight_value = parse_weight(weight)
-            
+
             data.append({
                 'price': price,
                 'name': name,

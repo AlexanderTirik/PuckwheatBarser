@@ -27,8 +27,8 @@ def parse_weight(weight):
     if weight.endswith('кг'):
         return 1000 * int(weight[:-2])
     else:
-        if weight.count('*'):
-            number, _, weight_one = weight.partition('*')
+        if weight.count('x'):
+            number, _, weight_one = weight.partition('x')
             return int(number) * parse_weight(weight_one)
         else:
             return int(weight[:-1])
@@ -38,19 +38,26 @@ def clean_weight(weight):
     """
     Parse weight and transform to pretty and format uniformly
     """
+    weight_pattern = r'[0-9]+.*'
+    weight = re.search(weight_pattern, weight).group(0)
+    if 'кг' in weight:
+        weight = weight.replace('кг', '').strip() + ' ' + 'кг'
+    else:
+        weight = weight.replace('г', '').strip() + ' ' + 'г'
+    weight = weight.replace('*', 'x')
+
     weight_value = parse_weight(weight)
     if weight_value % 1000 == 0:
-        weight = str(int(weight_value / 1000)) + 'кг'
-    weight = ''.join(weight.split())
+        weight = str(int(weight_value / 1000)) + ' кг'
     return weight
-
+    
 
 def clean_name(name):
     """
     Parse clean name, exclude weight and unnecessary words
     """
-    weight_pattern = r'(\([0-9]*\))|(([0-9]+[\*х])?[0-9]+\s?к?г)|([0-9]+\S+)|(\.)|(\")'
-    name = re.sub(weight_pattern, '', name)
+    skip_pattern = r'(\([0-9]*\))|(([0-9]+[\*х])?[0-9]+\s?к?г)|([0-9]+\S+)|(\.)|(\")'
+    name = re.sub(skip_pattern, '', name)
     name = name.strip()
     return name
 
