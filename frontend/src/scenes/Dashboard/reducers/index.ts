@@ -4,13 +4,13 @@ import { IBuckwheatData } from '../../../common/models/IBuckwheatData';
 import { fetchBuckwheatInfoRoutine } from '../routines/buckwheat';
 
 export interface IDashboardState {
-  isLoading: boolean;
+  isLoading: boolean[];
   buckwheatData: IBuckwheatData[];
   sort: Sort;
 }
 
 const initialState: IDashboardState = {
-  isLoading: false,
+  isLoading: [],
   buckwheatData: [],
   sort: Sort.None
 };
@@ -21,20 +21,24 @@ const reducer = (state = initialState, { type, payload }: Routine<any>): IDashbo
       return {
         ...state,
         sort: payload,
-        isLoading: true
+        isLoading: [...state.isLoading, true]
       };
     }
     case fetchBuckwheatInfoRoutine.SUCCESS: {
+      const isLoadingCopy = [...state.isLoading];
+      isLoadingCopy.pop();
       return {
         ...state,
-        buckwheatData: payload,
-        isLoading: false
+        buckwheatData: state.sort === payload.sort ? payload.buckwheatData : state.buckwheatData,
+        isLoading: isLoadingCopy
       };
     }
     case fetchBuckwheatInfoRoutine.FAILURE: {
+      const isLoadingCopy = [...state.isLoading];
+      isLoadingCopy.pop();
       return {
         ...state,
-        isLoading: false
+        isLoading: isLoadingCopy
       };
     }
     default:
