@@ -17,7 +17,9 @@ const SortButtons: FunctionComponent<IProps> = ({ sort, fetchBuckwheatInfo }) =>
       type="button"
       className={`${styles.сheap} ${sort === Sort.Asc ? styles.activeCheap : ''}`}
       onClick={() => {
-        fetchBuckwheatInfo(Sort.Asc);
+        if (sort !== Sort.Asc) {
+          fetchBuckwheatInfo(Sort.Asc);
+        }
       }}
     >
       Дешеві
@@ -26,7 +28,9 @@ const SortButtons: FunctionComponent<IProps> = ({ sort, fetchBuckwheatInfo }) =>
       type="button"
       className={`${styles.noSort} ${sort === Sort.None ? styles.activeNoSort : ''}`}
       onClick={() => {
-        fetchBuckwheatInfo(Sort.None);
+        if (sort !== Sort.None) {
+          fetchBuckwheatInfo(Sort.None);
+        }
       }}
     >
       Не сортувати
@@ -35,7 +39,9 @@ const SortButtons: FunctionComponent<IProps> = ({ sort, fetchBuckwheatInfo }) =>
       type="button"
       className={`${styles.expensive} ${sort === Sort.Desc ? styles.activeExpensive : ''}`}
       onClick={() => {
-        fetchBuckwheatInfo(Sort.Desc);
+        if (sort !== Sort.Desc) {
+          fetchBuckwheatInfo(Sort.Desc);
+        }
       }}
     >
       Дорогі
