@@ -1,7 +1,6 @@
 import aiohttp
 from bs4 import BeautifulSoup as bs
 import re
-from time import time
 
 
 async def bounded_fetch(session, url):

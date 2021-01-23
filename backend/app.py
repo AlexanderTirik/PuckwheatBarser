@@ -12,6 +12,10 @@ from backend.services import (
     get_response
 )
 
+from backend.urls import (
+    FOZZY_URL, EPICENTRK_URL, AUCHAN_URL
+)
+
 app = Sanic(__name__)
 CORS(app)
 sem = None
@@ -24,9 +28,9 @@ async def index(request):
 
 @app.route("get_data")
 async def get_data(request):
-    response_fozzy = await get_response('https://fozzyshop.ua/300143-krupa-grechnevaya')
-    response_epicentrk = await get_response('https://epicentrk.ua/ua/shop/krupy-i-makaronnye-izdeliya/fs/vid-krupa-grechnevaya/')
-    response_auchan = await get_response('https://auchan.zakaz.ua/uk/categories/buckwheat-auchan/')
+    response_fozzy = await get_response(FOZZY_URL)
+    response_epicentrk = await get_response(EPICENTRK_URL)
+    response_auchan = await get_response(AUCHAN_URL)
 
     data_fozzy = parse_fozzy(response_fozzy)
     data_epicentrk = parse_epicentrk(response_epicentrk)

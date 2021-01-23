@@ -2,12 +2,19 @@ from backend.services import (
     clean_weight, parse_weight, get_soup, parse_source_from_name, clean_name, fixed_price_format, check_is_packed
 )
 
+from backend.urls import (
+    EPICENTRK_HOST, AUCHAN_HOST
+)
+
+from backend.shop_names import (
+    FOZZY, EPICENTRK, AUCHAN
+)
+
 
 def parse_fozzy(response):
     """
     Parse buckwheat from fozzy
     """
-    shop = 'Fozzy'
     soup = get_soup(response)
     products = soup.find_all('div', class_='js-product-miniature-wrapper')
 
@@ -27,7 +34,7 @@ def parse_fozzy(response):
                                                                                                      '').strip()
             weight = clean_weight(weight)
             weight_value = parse_weight(weight)
-            is_packed, source = check_is_packed(source, default_source=shop)
+            is_packed, source = check_is_packed(source, default_source=FOZZY)
             
             data.append({
                 'price': price,
@@ -35,7 +42,7 @@ def parse_fozzy(response):
                 'source': source,
                 'productUrl': product_url,
                 'imgUrl': img_url,
-                'shop': shop,
+                'shop': FOZZY,
                 'weight': weight,
                 'weightValue': weight_value,
                 'is_packed': is_packed,
@@ -50,8 +57,6 @@ def parse_epicentrk(response):
     """
     Parse buckwheat from epicentrk
     """
-    host = 'https://epicentrk.ua'
-    shop = 'Епіцентр'
     soup = get_soup(response)
     products = soup.find_all('div', class_='card-wrapper')
 
@@ -64,13 +69,13 @@ def parse_epicentrk(response):
             price = fixed_price_format(price)
             source = product.find('ul', class_='card__characteristics').find_all('li')[1].get_text().replace('Бренд:',
                                                                                                              '').strip()
-            product_url = host + product.find('a', class_='card__photo').get('href')
+            product_url = EPICENTRK_HOST + product.find('a', class_='card__photo').get('href')
             img_url = product.find('a', class_='card__photo').img.get('src')
             weight = product.find('ul', class_='card__characteristics').find_all('li')[2].get_text().replace('Вага:',
                                                                                                              '').strip()
             weight = clean_weight(weight)
             weight_value = parse_weight(weight)
-            is_packed, source = check_is_packed(source, default_source=shop)
+            is_packed, source = check_is_packed(source, default_source=EPICENTRK)
             
             data.append({
                 'price': price,
@@ -78,7 +83,7 @@ def parse_epicentrk(response):
                 'source': source,
                 'productUrl': product_url,
                 'imgUrl': img_url,
-                'shop': shop,
+                'shop': EPICENTRK,
                 'weight': weight,
                 'weightValue': weight_value,
                 'is_packed': is_packed,
@@ -93,8 +98,6 @@ def parse_auchan(response):
     """
     Parse buckwheat from auchan
     """
-    host = 'https://auchan.zakaz.ua'
-    shop = 'Ашан'
     soup = get_soup(response)
     products = soup.find_all('div', class_='products-box__list-item')
     
@@ -106,12 +109,12 @@ def parse_auchan(response):
             name = product.a.get('title')
             name = clean_name(name)
             source = parse_source_from_name(name)
-            product_url = host + product.find('a', class_='product-tile').get('href')
+            product_url = AUCHAN_HOST + product.find('a', class_='product-tile').get('href')
             img_url = product.find('img', class_='product-tile__image-i').get('src')
             weight = product.find('div', class_='product-tile__title-wrapper').find('div').get_text()
             weight = clean_weight(weight)
             weight_value = parse_weight(weight)
-            is_packed, source = check_is_packed(source, default_source=shop)
+            is_packed, source = check_is_packed(source, default_source=AUCHAN)
             
             data.append({
                 'price': price,
@@ -119,7 +122,7 @@ def parse_auchan(response):
                 'source': source,
                 'productUrl': product_url,
                 'imgUrl': img_url,
-                'shop': shop,
+                'shop': AUCHAN,
                 'weight': weight,
                 'weightValue': weight_value,
                 'is_packed': is_packed,
