@@ -1,6 +1,7 @@
 import aiohttp
 from bs4 import BeautifulSoup as bs
 import re
+from time import time
 
 
 async def bounded_fetch(session, url):
@@ -11,13 +12,17 @@ async def bounded_fetch(session, url):
         return await response.text()
 
 
-async def get_soup(url):
+async def get_response(url):
     """
-    Download html from site
+    Download response from site
     """
     async with aiohttp.ClientSession() as session:
         response = await bounded_fetch(session, url)
-        return bs(response, features="html.parser")
+        return response
+
+
+def get_soup(response):
+    return bs(response, features="html.parser")
 
 
 def parse_weight(weight):

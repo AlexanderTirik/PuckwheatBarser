@@ -3,14 +3,12 @@ from backend.services import (
 )
 
 
-async def parse_fozzy():
+def parse_fozzy(response):
     """
     Parse buckwheat from fozzy
     """
-    url = 'https://fozzyshop.ua/300143-krupa-grechnevaya'
     shop = 'Fozzy'
-
-    soup = await get_soup(url)
+    soup = get_soup(response)
     products = soup.find_all('div', class_='js-product-miniature-wrapper')
 
     data = []
@@ -48,15 +46,13 @@ async def parse_fozzy():
     return data
 
 
-async def parse_epicentrk():
+def parse_epicentrk(response):
     """
     Parse buckwheat from epicentrk
     """
-    url = 'https://epicentrk.ua/ua/shop/krupy-i-makaronnye-izdeliya/fs/vid-krupa-grechnevaya/'
     host = 'https://epicentrk.ua'
     shop = 'Епіцентр'
-
-    soup = await get_soup(url)
+    soup = get_soup(response)
     products = soup.find_all('div', class_='card-wrapper')
 
     data = []
@@ -93,15 +89,13 @@ async def parse_epicentrk():
     return data
 
 
-async def parse_auchan():
+def parse_auchan(response):
     """
     Parse buckwheat from auchan
     """
-    url = 'https://auchan.zakaz.ua/uk/categories/buckwheat-auchan/'
     host = 'https://auchan.zakaz.ua'
     shop = 'Ашан'
-
-    soup = await get_soup(url)
+    soup = get_soup(response)
     products = soup.find_all('div', class_='products-box__list-item')
     
     data = []
