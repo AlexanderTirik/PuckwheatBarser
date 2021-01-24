@@ -1,6 +1,7 @@
+import re
+
 import aiohttp
 from bs4 import BeautifulSoup as bs
-import re
 
 
 async def bounded_fetch(session, url):
