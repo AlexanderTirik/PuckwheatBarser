@@ -14,7 +14,7 @@ interface IProps {
 const Dashboard: FunctionComponent<IProps> = ({ fetchBuckwheatInfo }) => {
   useEffect(() => {
     fetchBuckwheatInfo(Sort.None);
-  }, []);
+  }, [fetchBuckwheatInfo]);
   return (
     <>
       <Header />
