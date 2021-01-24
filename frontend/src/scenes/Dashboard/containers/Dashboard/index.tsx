@@ -1,21 +1,24 @@
 import React, { FunctionComponent, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { IBindingAction } from '../../../../common/models/callback/IBindingAction';
+import Header from '../../../../components/Header';
+import SortButtons from '../SortButtons';
 import { fetchBuckwheatInfoRoutine } from '../../routines/buckwheat';
 import BuckwheadCards from '../BuckwheadCards';
-import styles from './styles.module.sass';
+import { IBindingCallback } from '../../../../common/models/callback/IBindingCallback';
+import { Sort } from '../../../../common/enums/Sort';
 
 interface IProps {
-  fetchBuckwheatInfo: IBindingAction;
+  fetchBuckwheatInfo: IBindingCallback<Sort>;
 }
 
 const Dashboard: FunctionComponent<IProps> = ({ fetchBuckwheatInfo }) => {
   useEffect(() => {
-    fetchBuckwheatInfo();
-  }, []);
+    fetchBuckwheatInfo(Sort.None);
+  }, [fetchBuckwheatInfo]);
   return (
     <>
-      <header className={`d-flex justify-content-center ${styles.header}`}>Puckwheat Barser</header>
+      <Header />
+      <SortButtons />
       <BuckwheadCards />
     </>
   );

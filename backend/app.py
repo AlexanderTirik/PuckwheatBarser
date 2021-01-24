@@ -8,16 +8,17 @@ from backend.parsers import (
     parse_fozzy, parse_epicentrk, parse_auchan
 )
 
+from backend.services import (
+    get_response, sort_by_price
+)
+
+from backend.urls import (
+    FOZZY_URL, EPICENTRK_URL, AUCHAN_URL
+)
+
 app = Sanic(__name__)
 CORS(app)
 sem = None
-
-
-# @app.listener('before_server_start')
-# def init(sanic, loop):
-#     global sem
-#     concurrency_per_worker = 4
-#     sem = asyncio.Semaphore(concurrency_per_worker, loop=loop)
 
 
 @app.route("/")
@@ -27,12 +28,21 @@ async def index(request):
 
 @app.route("get_data")
 async def get_data(request):
-    data_fozzy = await parse_fozzy()
-    data_epicentrik = await parse_epicentrk()
-    data_auchan = await parse_auchan()
+    response_fozzy = await get_response(FOZZY_URL)
+    response_epicentrk = await get_response(EPICENTRK_URL)
+    response_auchan = await get_response(AUCHAN_URL)
+
+    data_fozzy = parse_fozzy(response_fozzy)
+    data_epicentrk = parse_epicentrk(response_epicentrk)
+    data_auchan = parse_auchan(response_auchan)
     
-    data = list(chain(data_fozzy, data_epicentrik, data_auchan))
-    return json(data)
+    data = list(chain(data_fozzy, data_epicentrk, data_auchan))
+    sort_order = request.args.get('sort')
+    data = sort_by_price(data, order=sort_order)
+    return json({
+        'buckwheatData': data,
+        'sort': sort_order,
+    })
 
 
 if __name__ == "__main__":

@@ -46,7 +46,8 @@
   },
   "ignorePatterns": [
     "config-overrides.js",
-    "node_modules/"
+    "node_modules/",
+    "build/"
   ],
   "settings": {
     "import/resolver": {
