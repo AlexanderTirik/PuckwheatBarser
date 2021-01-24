@@ -7,11 +7,9 @@ from sanic_cors import CORS
 from backend.parsers import (
     parse_fozzy, parse_epicentrk, parse_auchan
 )
-
 from backend.services import (
     get_response, sort_by_price
 )
-
 from backend.urls import (
     FOZZY_URL, EPICENTRK_URL, AUCHAN_URL
 )
