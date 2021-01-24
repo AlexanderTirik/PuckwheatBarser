@@ -10,7 +10,7 @@ from backend.parsers import (
 from backend.services import (
     get_response, sort_by_price
 )
-from backend.urls import (
+from backend.consts import (
     FOZZY_URL, EPICENTRK_URL, AUCHAN_URL
 )
 
