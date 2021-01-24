@@ -3,10 +3,8 @@ from backend.services import (
     parse_source_from_name, clean_name,
     fixed_price_format, is_buckwheat
 )
-from backend.urls import (
-    EPICENTRK_HOST, AUCHAN_HOST
-)
-from backend.shop_names import (
+from backend.consts import (
+    EPICENTRK_HOST, AUCHAN_HOST,
     FOZZY, EPICENTRK, AUCHAN
 )
 
