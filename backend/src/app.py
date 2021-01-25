@@ -1,12 +1,13 @@
 from itertools import chain
+import os
 
 from sanic import Sanic
 from sanic.response import json
 from sanic_cors import CORS
 
-from backend.parsers import parse_fozzy, parse_epicentrk, parse_auchan
-from backend.services import get_response, sort_by_price
-from backend.consts import FOZZY_URL, EPICENTRK_URL, AUCHAN_URL
+from src.parsers import parse_fozzy, parse_epicentrk, parse_auchan
+from src.services import get_response, sort_by_price
+from src.consts import FOZZY_URL, EPICENTRK_URL, AUCHAN_URL
 
 app = Sanic(__name__)
 CORS(app)
@@ -40,4 +41,6 @@ async def get_data(request):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000, debug=True, auto_reload=True)
+    app.run(
+        host="0.0.0.0", port=8000, debug=os.getenv("DEBUG", False), auto_reload=True
+    )

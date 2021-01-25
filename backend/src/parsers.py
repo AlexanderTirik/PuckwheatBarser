@@ -1,6 +1,6 @@
 import logging
 
-from backend.services import (
+from src.services import (
     clean_weight,
     get_soup,
     parse_source_from_name,
@@ -8,7 +8,7 @@ from backend.services import (
     fixed_price_format,
     is_buckwheat,
 )
-from backend.consts import EPICENTRK_HOST, AUCHAN_HOST, FOZZY, EPICENTRK, AUCHAN
+from src.consts import EPICENTRK_HOST, AUCHAN_HOST, FOZZY, EPICENTRK, AUCHAN
 
 
 def parse_fozzy(response):
