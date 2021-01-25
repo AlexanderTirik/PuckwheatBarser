@@ -35,7 +35,7 @@ async def get_data(request):
         data_epicentrk = parse_epicentrk(response_epicentrk)
         data_auchan = parse_auchan(response_auchan)
 
-        data = list(chain(data_fozzy, data_epicentrk, data_auchan))
+        data = list(chain(data_fozzy, data_epicentrk, data_auchan)) or last_data
         last_data = data
 
     return json(
