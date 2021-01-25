@@ -4,15 +4,9 @@ from sanic import Sanic
 from sanic.response import json
 from sanic_cors import CORS
 
-from backend.parsers import (
-    parse_fozzy, parse_epicentrk, parse_auchan
-)
-from backend.services import (
-    get_response, sort_by_price
-)
-from backend.consts import (
-    FOZZY_URL, EPICENTRK_URL, AUCHAN_URL
-)
+from backend.parsers import parse_fozzy, parse_epicentrk, parse_auchan
+from backend.services import get_response, sort_by_price
+from backend.consts import FOZZY_URL, EPICENTRK_URL, AUCHAN_URL
 
 app = Sanic(__name__)
 CORS(app)
@@ -33,20 +27,17 @@ async def get_data(request):
     data_fozzy = parse_fozzy(response_fozzy)
     data_epicentrk = parse_epicentrk(response_epicentrk)
     data_auchan = parse_auchan(response_auchan)
-    
+
     data = list(chain(data_fozzy, data_epicentrk, data_auchan))
-    sort_order = request.args.get('sort')
+    sort_order = request.args.get("sort")
     data = sort_by_price(data, order=sort_order)
-    return json({
-        'buckwheatData': data,
-        'sort': sort_order,
-    })
+    return json(
+        {
+            "buckwheatData": data,
+            "sort": sort_order,
+        }
+    )
 
 
 if __name__ == "__main__":
-    app.run(
-        host="0.0.0.0",
-        port=8000,
-        debug=True,
-        auto_reload=True
-    )
+    app.run(host="0.0.0.0", port=8000, debug=True, auto_reload=True)
