@@ -1,5 +1,5 @@
 from backend.services import (
-    clean_weight, parse_weight, get_soup,
+    clean_weight, get_soup,
     parse_source_from_name, clean_name,
     fixed_price_format, is_buckwheat
 )
@@ -33,7 +33,6 @@ def parse_fozzy(response):
             weight = product.find('div', class_='product-reference text-muted').a.get_text().replace('Фасовка: ',
                                                                                                      '').strip()
             weight = clean_weight(weight)
-            weight_value = parse_weight(weight)
             
             data.append({
                 'price': price,
@@ -73,7 +72,6 @@ def parse_epicentrk(response):
             weight = product.find('ul', class_='card__characteristics').find_all('li')[2].get_text().replace('Вага:',
                                                                                                              '').strip()
             weight = clean_weight(weight)
-            weight_value = parse_weight(weight)
             
             data.append({
                 'price': price,
@@ -111,7 +109,6 @@ def parse_auchan(response):
             img_url = product.find('img', class_='product-tile__image-i').get('src')
             weight = product.find('div', class_='product-tile__title-wrapper').find('div').get_text()
             weight = clean_weight(weight)
-            weight_value = parse_weight(weight)
             
             data.append({
                 'price': price,
