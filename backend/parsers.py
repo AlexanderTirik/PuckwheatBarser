@@ -1,3 +1,5 @@
+import logging
+
 from backend.services import (
     clean_weight, get_soup,
     parse_source_from_name, clean_name,
@@ -44,7 +46,7 @@ def parse_fozzy(response):
                 'weight': weight
             })
         except Exception as e:
-            print(f'Something was wrong: {e}')
+            logging.warning(e)
 
     return data
 
@@ -83,7 +85,7 @@ def parse_epicentrk(response):
                 'weight': weight
             })
         except Exception as e:
-            print(f'Something was wrong: {e}')
+            logging.warning(e)
 
     return data
 
@@ -120,6 +122,6 @@ def parse_auchan(response):
                 'weight': weight
             })
         except Exception as e:
-            print(f'Something was wrong: {e}')
+            logging.warning(e)
 
     return data
