@@ -29,7 +29,7 @@ const reducer = (state = initialState, { type, payload }: Routine<any>): IDashbo
       isLoadingCopy.pop();
       return {
         ...state,
-        buckwheatData: state.sort === payload.sort ? payload.buckwheatData : state.buckwheatData,
+        buckwheatData: payload.sort && state.sort === payload.sort ? payload.buckwheatData : state.buckwheatData,
         isLoading: isLoadingCopy
       };
     }
