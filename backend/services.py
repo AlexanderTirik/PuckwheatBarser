@@ -85,14 +85,23 @@ def parse_source_from_name(name, default_name=None):
 
 
 def fixed_price_format(price, digits=2):
+    """
+    Set a fixed number of decimal places
+    """
     return f'{float(price):.{digits}f}'
 
 
 def asc_sort_by_price(data):
+    """
+    Sorts products by price in ascending order
+    """
     return sorted(data, key=lambda el: float(el.get('price')))
 
 
 def sort_by_price(data, order='NONE'):
+    """
+    Sorts products by price
+    """
     if order == 'NONE':
         return data
     elif order == 'ASC':
@@ -102,6 +111,9 @@ def sort_by_price(data, order='NONE'):
 
 
 def is_buckwheat(name):
+    """
+    Check the product is buckwheat
+    """
     good = ['гречка', 'гречана', 'крупа']
     bad = ['борошно', ]
     return any(el in name.lower() for el in good) and not any(el in name.lower() for el in bad)
