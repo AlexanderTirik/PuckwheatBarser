@@ -23,7 +23,7 @@ async def index(request):
 @app.route("get_data")
 async def get_data(request):
     global last_data
-    
+
     sort_order = request.args.get("sort")
     if sort_order:
         data = sort_by_price(last_data, order=sort_order)
@@ -37,8 +37,7 @@ async def get_data(request):
         data_auchan = parse_auchan(response_auchan)
 
         data = list(chain(data_fozzy, data_epicentrk, data_auchan))
-
-    last_data = data
+        last_data = data
 
     return json(
         {
