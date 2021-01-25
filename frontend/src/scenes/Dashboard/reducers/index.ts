@@ -20,7 +20,7 @@ const reducer = (state = initialState, { type, payload }: Routine<any>): IDashbo
     case fetchBuckwheatInfoRoutine.TRIGGER: {
       return {
         ...state,
-        sort: payload,
+        sort: payload || Sort.None,
         isLoading: [...state.isLoading, true]
       };
     }
