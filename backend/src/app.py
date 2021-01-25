@@ -25,7 +25,7 @@ async def get_data(request):
 
     sort_order = request.args.get("sort")
     if sort_order:
-        data = sort_by_price(last_data, order=sort_order)
+        data = sort_by_price(last_data, order=sort_order) or last_data
     else:
         response_fozzy = await get_response(FOZZY_URL)
         response_epicentrk = await get_response(EPICENTRK_URL)
@@ -35,7 +35,7 @@ async def get_data(request):
         data_epicentrk = parse_epicentrk(response_epicentrk)
         data_auchan = parse_auchan(response_auchan)
 
-        data = list(chain(data_fozzy, data_epicentrk, data_auchan))
+        data = list(chain(data_fozzy, data_epicentrk, data_auchan)) or last_data
         last_data = data
 
     return json(
