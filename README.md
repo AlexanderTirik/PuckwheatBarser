@@ -3,7 +3,8 @@
 ## backend:
 1.  ```cd backend``` 
 2. ```pip3 install -r requirements.txt```
-3. ```python3 app.py```
+3. ```cd src```
+4. ```python3 app.py```
 
 or using docker:
 1. ``` docker-compose build ```
