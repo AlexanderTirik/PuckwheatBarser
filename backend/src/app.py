@@ -4,9 +4,9 @@ from sanic import Sanic
 from sanic.response import json
 from sanic_cors import CORS
 
-from backend.parsers import parse_fozzy, parse_epicentrk, parse_auchan
-from backend.services import get_response, sort_by_price
-from backend.consts import FOZZY_URL, EPICENTRK_URL, AUCHAN_URL
+from src.parsers import parse_fozzy, parse_epicentrk, parse_auchan
+from src.services import get_response, sort_by_price
+from src.consts import FOZZY_URL, EPICENTRK_URL, AUCHAN_URL
 
 app = Sanic(__name__)
 CORS(app)
