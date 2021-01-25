@@ -20,7 +20,7 @@ const reducer = (state = initialState, { type, payload }: Routine<any>): IDashbo
     case fetchBuckwheatInfoRoutine.TRIGGER: {
       return {
         ...state,
-        sort: payload,
+        sort: payload || Sort.None,
         isLoading: [...state.isLoading, true]
       };
     }
@@ -29,7 +29,7 @@ const reducer = (state = initialState, { type, payload }: Routine<any>): IDashbo
       isLoadingCopy.pop();
       return {
         ...state,
-        buckwheatData: state.sort === payload.sort ? payload.buckwheatData : state.buckwheatData,
+        buckwheatData: payload.sort && state.sort !== payload.sort ? state.buckwheatData : payload.buckwheatData,
         isLoading: isLoadingCopy
       };
     }

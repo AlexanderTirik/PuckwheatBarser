@@ -8,12 +8,12 @@ import { IBindingCallback } from '../../../../common/models/callback/IBindingCal
 import { Sort } from '../../../../common/enums/Sort';
 
 interface IProps {
-  fetchBuckwheatInfo: IBindingCallback<Sort>;
+  fetchBuckwheatInfo: IBindingCallback<Sort | undefined>;
 }
 
 const Dashboard: FunctionComponent<IProps> = ({ fetchBuckwheatInfo }) => {
   useEffect(() => {
-    fetchBuckwheatInfo(Sort.None);
+    fetchBuckwheatInfo(undefined);
   }, [fetchBuckwheatInfo]);
   return (
     <>
