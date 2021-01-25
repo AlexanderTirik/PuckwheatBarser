@@ -1,4 +1,5 @@
 from itertools import chain
+import os
 
 from sanic import Sanic
 from sanic.response import json
@@ -40,4 +41,6 @@ async def get_data(request):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000, debug=True, auto_reload=True)
+    app.run(
+        host="0.0.0.0", port=8000, debug=os.getenv("DEBUG", False), auto_reload=True
+    )
