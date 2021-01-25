@@ -11,7 +11,6 @@ from src.consts import FOZZY_URL, EPICENTRK_URL, AUCHAN_URL
 
 app = Sanic(__name__)
 CORS(app)
-sem = None
 last_data = []
 
 
