@@ -1,10 +1,8 @@
 version: '3.7'
 services:
   api:
-    build: .
-    command: python backend/app.py
+    build: backend/.
+    command: python src/app.py
     tty: true
-    volumes:
-      - .:/app
     ports:
       - 8000:8000
