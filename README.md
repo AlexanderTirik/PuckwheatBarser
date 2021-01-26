@@ -1,5 +1,8 @@
 # PuckwheatParser
 
+Frontend prod: https://puckwheat-barser.vercel.app/
+Backend prod: https://puckwheatbarser-backend.herokuapp.com
+
 ## backend:
 1.  ```cd backend``` 
 2. ```pip3 install -r requirements.txt```
