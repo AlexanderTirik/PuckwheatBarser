@@ -1,0 +1,82 @@
+.auchanWrapper
+  background: #ffd1c9
+
+.epicenterWrapper
+  background: #e8e3ff
+  .img
+    padding: 5px 10px
+
+.fozzyWrapper
+  background: #fff9c9
+
+.cardWrapper
+  width: 300px
+  padding: 10px 20px
+  height: 145px
+
+.card
+  -webkit-box-shadow: 0px 0px 8px 4px rgba(208, 204, 194, 0.2)
+  -moz-box-shadow: 0px 0px 8px 4px rgba(208, 204, 194, 0.2)
+  box-shadow: 0px 0px 8px 4px rgba(208, 204, 194, 0.2)
+
+  cursor: pointer
+  transition: 0.2s
+  border-radius: 4px
+  background: #ffffff
+  text-overflow: ellipsis
+
+.name
+  margin: 0 20px
+  text-overflow: ellipsis
+  overflow: hidden
+  white-space: nowrap
+  font-size: 1.1rem
+
+.img
+  max-height: 100px
+  max-width: 60px
+  margin-left: 5px
+  width: 30%
+
+.infoBlock
+  margin-left: 10px
+  \:global(.iconText)
+    margin-bottom: 5px
+
+
+.card:hover
+  transform: scale(1.1)
+  transition: 0.2s
+  -webkit-box-shadow: 0px 0px 8px 4px rgba(208, 204, 194, 0.5)
+  -moz-box-shadow: 0px 0px 8px 4px rgba(208, 204, 194, 0.5)
+  box-shadow: 0px 0px 8px 4px rgba(208, 204, 194, 0.5)
+
+  .name
+    text-overflow: clip
+    overflow: visible
+    white-space: normal
+
+@media only screen and (max-width: 600px)
+  .cardWrapper
+    width: 300px
+    min-height: 160px
+    height: auto
+    padding: 10px
+
+  .card
+    min-height: 160px
+
+  .name
+    text-overflow: clip
+    overflow: visible
+    white-space: normal
+
+  .card:hover
+    transform: scale(1)
+
+    -webkit-box-shadow: 0px 0px 8px 4px rgba(208, 204, 194, 0.2)
+    -moz-box-shadow: 0px 0px 8px 4px rgba(208, 204, 194, 0.2)
+    box-shadow: 0px 0px 8px 4px rgba(208, 204, 194, 0.2)
+
+
+
