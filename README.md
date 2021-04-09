@@ -2,6 +2,7 @@
 
 Frontend prod: https://puckwheat-barser.vercel.app/
 Backend prod: https://puckwheatbarser-backend.herokuapp.com
+Due to low project support, the project backend stopped working
 
 ## backend:
 1.  ```cd backend``` 
